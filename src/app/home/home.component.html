@@ -1,0 +1,48 @@
+<div class="background-search">
+  <div class="search">
+    <div class="input-group input-group-lg mb-3">
+      <input type="text" class="form-control" placeholder="¿Qué estás buscando?" aria-label="¿Qué estás buscando?"
+        aria-describedby="button-addon2">
+      <div class="input-group-append">
+        <button class="btn btn-success" type="button" id="button-addon2"><i class="fas fa-search"></i> Buscar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2><b>Estas son las mejores ofertas para hoy</b></h2>
+      <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+        <!-- Wrapper for carousel items -->
+        <div class="carousel-inner">
+          <div *ngFor="let product of products; let i = index" class="item carousel-item"
+            [ngClass]="{'active': i === 0}">
+            <div class="row">
+              <div class="col-md-4 mb-3" *ngFor="let data of product">
+                <div class="card text-center">
+                  <div class="img-box">
+                    <img src="{{ data.url }}" class="img-responsive img-fluid" alt="">
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title">{{data.name}}</h5>
+                    <p class="card-text">{{data.description}}</p>
+                    <a href="#" class="btn btn-primary btn-block">VER</a>
+                    <button type="button" (click)="buy(data)" class="btn btn-success btn-block">COMPRAR</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Carousel controls -->
+        <a class="carousel-control left carousel-control-prev" href="#myCarousel" data-slide="prev">
+          <i class="fa fa-angle-left"></i>
+        </a>
+        <a class="carousel-control right carousel-control-next" href="#myCarousel" data-slide="next">
+          <i class="fa fa-angle-right"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

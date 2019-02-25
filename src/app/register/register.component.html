@@ -1,0 +1,86 @@
+<div class="py-5">
+  <div class="col-md-6 mx-auto">
+    <span class="anchor" id="formLogin"></span>
+    <!-- form card login -->
+    <div *ngIf="success" class="alert alert-success" role="alert">
+      Cliente registrado!
+    </div>
+    <div class="card rounded-0">
+      <div class="card-header">
+        <h3 class="mb-0">Registrar Cliente</h3>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="form">
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="tipodocumento">Tipo documento</label>
+              <select class="custom-select rounded-0" type="text" formControlName="tipodocumento">
+                <option value=''>-- Seleccione una opción --</option>
+                <option *ngFor="let td of tiposDocumentos" [ngValue]="td">{{td.description}}</option>
+              </select>
+              <div *ngIf="submitted && registerForm.controls.tipodocumento.errors" class="error">
+                <div *ngIf="registerForm.controls.tipodocumento.errors.required">Tipo documento requerido</div>
+              </div>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="numerodocumento">Número documento</label>
+              <input type="text" formControlName="numerodocumento" class="form-control rounded-0">
+              <div *ngIf="submitted && registerForm.controls.numerodocumento.errors" class="error">
+                <div *ngIf="registerForm.controls.numerodocumento.errors.required">Número documento requerido</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="nombres">Nombres</label>
+              <input type="text" formControlName="nombres" class="form-control rounded-0">
+              <div *ngIf="submitted && registerForm.controls.nombres.errors" class="error">
+                <div *ngIf="registerForm.controls.nombres.errors.required">Nombres requeridos</div>
+              </div>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="apellidos">Apellidos</label>
+              <input type="text" formControlName="apellidos" class="form-control rounded-0">
+              <div *ngIf="submitted && registerForm.controls.apellidos.errors" class="error">
+                <div *ngIf="registerForm.controls.apellidos.errors.required">Apellidos requeridos</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label for="email">Email</label>
+              <input type="email" formControlName="email" class="form-control rounded-0">
+              <div *ngIf="submitted && registerForm.controls.email.errors" class="error">
+                <div *ngIf="registerForm.controls.email.errors.required">Email requerido</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="password">Contraseña</label>
+              <input type="password" formControlName="password" class="form-control rounded-0">
+              <div *ngIf="submitted && registerForm.controls.password.errors" class="error">
+                <div *ngIf="registerForm.controls.password.errors.required">Contraseña requerida</div>
+              </div>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="repassword">Confirmar contraseña</label>
+              <input type="password" formControlName="repassword" class="form-control rounded-0">
+              <div *ngIf="submitted && registerForm.controls.repassword.errors" class="error">
+                <div *ngIf="registerForm.controls.repassword.errors.required">Contraseña requerida</div>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary float-right ml-3">Registrar</button>
+          <button type="reset" (click)="reset()" class="btn btn-secondary float-right ml-3">Cancelar</button>
+        </form>
+      </div>
+      <!--/card-block-->
+    </div>
+    <!-- /form card login -->
+  </div>
+</div>

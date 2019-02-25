@@ -1,0 +1,18 @@
+{
+  "universal": {
+    "project": "turesbalon",
+    "skipInstall": false,
+    "directory": ".",
+    "http": true
+  },
+  "serverless": {
+    "provider": "aws",
+    "project": "turesbalon",
+    "skipInstall": false,
+    "directory": ".",
+    "serverless": {
+      "aws": {},
+      "gcloud": {}
+    }
+  }
+}
