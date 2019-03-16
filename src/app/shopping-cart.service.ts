@@ -23,8 +23,27 @@ export class ShoppingCartService {
 
   addItemCart(item) {
     let items = this.getItemsCart();
-    items.push(item);
+    let index = items.findIndex(i => i.name === item.name);
+    let _item = items[index];
+    if (_item) {
+      _item.size = _item.size + 1;
+    } else {
+      item.size = 1;
+      items.push(item);
+    }
     localStorage.setItem('cart', JSON.stringify(items));
   }
 
+  setItemsCart(item, action) {
+    let items = this.getItemsCart();
+    let index = items.findIndex(i => i.name === item.name);
+    if (items[index]) {
+      if (action == 'update') {
+        items[index] = item;
+      } else if (action == 'delete') {
+        items.splice(index, 1);
+      }
+      localStorage.setItem('cart', JSON.stringify(items));
+    }
+  }
 }

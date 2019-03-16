@@ -1,11 +1,55 @@
 <div class="background-search">
   <div class="search">
-    <div class="input-group input-group-lg mb-3">
+    <div class="input-group input-group-lg col-md-8 offset-md-2">
       <input type="text" class="form-control" placeholder="¿Qué estás buscando?" aria-label="¿Qué estás buscando?"
-        aria-describedby="button-addon2">
+        aria-describedby="button-addon2" [(ngModel)]="filtro" #ctrl="ngModel">
       <div class="input-group-append">
-        <button class="btn btn-success" type="button" id="button-addon2"><i class="fas fa-search"></i> Buscar</button>
+        <button class="btn btn-success" type="button" id="button-addon2" (click)="buscar()"><i
+            class="fas fa-search"></i> Buscar</button>
       </div>
+    </div>
+  </div>
+  <div class="search-result">
+    <div class="col-md-8 offset-md-2">
+      <mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="imagen">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <div class="row">
+              <div class="img-box">
+                <img src="{{ row.url }}" class="img-center img-responsive img-fluid" alt="">
+              </div>
+            </div>
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="nombre">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> </mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.nombre}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="descripcion">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> </mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.descripcion}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="ver">
+          <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+          <mat-cell *matCellDef="let row"> <a href="#" class="btn btn-primary btn-sm">VER</a> </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="comprar">
+          <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+          <mat-cell *matCellDef="let row"> <button type="button" (click)="buy(row)"
+              class="btn btn-success btn-sm">COMPRAR</button> </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;">
+        </mat-row>
+      </mat-table>
+
+      <mat-paginator [pageSizeOptions]="[5]"></mat-paginator>
+    </div>
+    <div class="col-md-8 offset-md-2" style="margin-top: 5px;">
+      <button *ngIf="productos.length > 0" type="button" (click)="limpiar()"
+        class="btn btn-secondary btn-block">LIMPIAR</button>
     </div>
   </div>
 </div>
@@ -14,7 +58,6 @@
     <div class="col-md-12">
       <h2><b>Estas son las mejores ofertas para hoy</b></h2>
       <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
-        <!-- Wrapper for carousel items -->
         <div class="carousel-inner">
           <div *ngFor="let product of products; let i = index" class="item carousel-item"
             [ngClass]="{'active': i === 0}">
@@ -25,9 +68,9 @@
                     <img src="{{ data.url }}" class="img-responsive img-fluid" alt="">
                   </div>
                   <div class="card-body">
-                    <h5 class="card-title">{{data.name}}</h5>
-                    <p class="card-text">{{data.description}}</p>
-                    <a href="#" class="btn btn-primary btn-block">VER</a>
+                    <h5 class="card-title">{{data.nombre}}</h5>
+                    <p class="card-text">{{data.descripcion}}</p>
+                    <button type="button" (click)="verProducto(data)" class="btn btn-primary btn-block">VER</button>
                     <button type="button" (click)="buy(data)" class="btn btn-success btn-block">COMPRAR</button>
                   </div>
                 </div>
@@ -40,6 +83,75 @@
           <i class="fa fa-angle-left"></i>
         </a>
         <a class="carousel-control right carousel-control-next" href="#myCarousel" data-slide="next">
+          <i class="fa fa-angle-right"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2><b>CATEGORÍAS</b></h2>
+      <div id="myCategorias" class="carousel slide" data-ride="carousel" data-interval="0">
+        <!-- Wrapper for carousel items -->
+        <div class="carousel-inner">
+          <div class="item carousel-item active">
+            <div class="row">
+              <div class="col-md-4 mb-3">
+                <div class="card text-center">
+                  <div class="img-box">
+                    <img src="./assets/images/champions-league.jpg" class="img-responsive img-fluid" alt="">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <div class="card text-center">
+                  <div class="img-box">
+                    <img src="./assets/images/copa-aguila.png" class="img-responsive img-fluid" alt="">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <div class="card text-center">
+                  <div class="img-box">
+                    <img src="./assets/images/copa-america.jpg" class="img-responsive img-fluid" alt="">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="item carousel-item">
+            <div class="row">
+              <div class="col-md-4 mb-3">
+                <div class="card text-center">
+                  <div class="img-box">
+                    <img src="./assets/images/copa-libertadores.jpg" class="img-responsive img-fluid" alt="">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <div class="card text-center">
+                  <div class="img-box">
+                    <img src="./assets/images/europa_league.png" class="img-responsive img-fluid" alt="">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <div class="card text-center">
+                  <div class="img-box">
+                    <img src="./assets/images/fifa-world-cup.jpg" class="img-responsive img-fluid" alt="">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Carousel controls -->
+        <a class="carousel-control left carousel-control-prev" href="#myCategorias" data-slide="prev">
+          <i class="fa fa-angle-left"></i>
+        </a>
+        <a class="carousel-control right carousel-control-next" href="#myCategorias" data-slide="next">
           <i class="fa fa-angle-right"></i>
         </a>
       </div>

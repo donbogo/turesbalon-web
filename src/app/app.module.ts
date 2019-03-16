@@ -4,6 +4,8 @@ import { TransferHttpCacheModule } from '@nguniversal/common';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatPaginatorModule, MatSnackBarModule, MatSortModule, MatTableModule } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,6 +21,9 @@ import { TokenInterceptorService } from './token-interceptor.service';
 import { FooterComponent } from './footer/footer.component';
 import { CartComponent } from './cart/cart.component';
 import { OrdersComponent } from './orders/orders.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { LoginSignupComponent } from './login-signup/login-signup.component';
+import { ProductComponent } from './product/product.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +35,10 @@ import { OrdersComponent } from './orders/orders.component';
     LoginComponent,
     FooterComponent,
     CartComponent,
-    OrdersComponent
+    OrdersComponent,
+    CheckoutComponent,
+    LoginSignupComponent,
+    ProductComponent
   ],
   imports: [
     CommonModule,
@@ -40,7 +48,12 @@ import { OrdersComponent } from './orders/orders.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatPaginatorModule,
+    MatSnackBarModule,
+    MatSortModule,
+    MatTableModule
   ],
   providers: [AuthService, AuthGuard, ShoppingCartService, {
     provide: HTTP_INTERCEPTORS,

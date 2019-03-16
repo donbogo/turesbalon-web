@@ -2,7 +2,7 @@ import { LOCAL_STORAGE } from '@ng-toolkit/universal';
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSubmit() {
+  onSubmit(router) {
     this.submitted = true;
     if (this.loginForm.invalid) {
       return;
@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
         this.submitted = false;
         this.loginForm.reset();
         this.localStorage.setItem('token', res.token);
-        this.router.navigate(['/']);
+        this.router.navigate([router]);
       },
       err => { console.error(err) }
     );

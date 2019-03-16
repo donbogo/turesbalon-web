@@ -1,0 +1,63 @@
+<div class="py-5">
+  <div class="col-md-5 mx-auto">
+    <span class="anchor" id="formLogin"></span>
+    <div class="card rounded-0">
+      <div class="card-header">
+        <h3 class="panel-title display-td">Hacer pago</h3>
+        <div class="display-td">
+          <img class="img-responsive pull-right" src="http://i76.imgup.net/accepted_c22e0.png">
+        </div>
+      </div>
+      <div class="card-body">
+        <form role="form" class="form">
+          <div class="form-group">
+            <label for="username">Nombre completo</label>
+            <input type="text" class="form-control" name="username" placeholder="" required="">
+          </div>
+
+          <div class="form-group">
+            <label for="cardNumber">Número de tarjeta</label>
+            <div class="input-group">
+              <input type="text" class="form-control" name="cardNumber" placeholder="">
+              <div class="input-group-append">
+                <span class="input-group-text text-muted">
+                  <i class="fab fa-cc-visa"></i>   <i class="fab fa-cc-amex"></i>  
+                  <i class="fab fa-cc-mastercard"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-8">
+              <div class="form-group">
+                <label><span class="hidden-xs">Fecha de expiración</span> </label>
+                <div class="input-group">
+                  <input type="number" class="form-control" placeholder="MM" name="">
+                  <input type="number" class="form-control" placeholder="AA" name="">
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label data-toggle="tooltip" title=""
+                  data-original-title="Código de 3 dígitos en el reverso de la tarjeta.">CVV
+                  <i class="fa fa-question-circle"></i></label>
+                <input type="number" class="form-control" required="">
+              </div>
+            </div>
+          </div>
+          <br />
+          <div class="alert alert-primary" role="alert">
+            <div class="row">
+              <div class="col">Valor a pagar:</div>
+              <div class="col" style="text-align: right;">$ 400.000</div>
+            </div>
+          </div>
+          <br />
+          <button class="btn btn-success btn-lg btn-block" type="button"> PAGAR </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
